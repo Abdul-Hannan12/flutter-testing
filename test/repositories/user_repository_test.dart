@@ -117,7 +117,7 @@ void main() {
                 },
               ).thenAnswer(
                 (invocation) async {
-                  return Response('[]', 500);
+                  return Response('{}', 500);
                 },
               );
 

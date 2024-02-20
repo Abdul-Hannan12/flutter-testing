@@ -1,19 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
-
 import '../models/user.dart';
-import '../repositories/user_repository.dart';
 
 class UserPage extends StatefulWidget {
-  const UserPage({super.key});
+  final Future<List<User>> futureUsers;
+  const UserPage({super.key, required this.futureUsers});
 
   @override
   State<UserPage> createState() => _UserPageState();
 }
 
 class _UserPageState extends State<UserPage> {
-  Future<List<User>> getUsers = UserRepository(Client()).fetchUsers();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +17,7 @@ class _UserPageState extends State<UserPage> {
         title: const Text('Users'),
       ),
       body: FutureBuilder(
-        future: getUsers,
+        future: widget.futureUsers,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             final List<User> users = snapshot.data!;

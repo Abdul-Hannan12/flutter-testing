@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_testing/repositories/user_repository.dart';
 import 'package:flutter_testing/screens/counter_screen.dart';
 import 'package:flutter_testing/screens/user_screen.dart';
+import 'package:http/http.dart' show Client;
 
 void main() {
   runApp(const MyApp());
@@ -60,7 +62,9 @@ class HomePage extends StatelessWidget {
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) {
-                    return const UserPage();
+                    return UserPage(
+                      futureUsers: UserRepository(Client()).fetchUsers(),
+                    );
                   },
                 ),
               );
